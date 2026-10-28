@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import pool from '../../db/db.js';
 
-async function register({ username, email, password }) {
+async function registerService({ username, email, password }) {
     
     if ( !username || !email || !password ) {
         const error = new Error('Pseudo, e-mail, mot de passe sont obligatoire');
@@ -38,4 +38,4 @@ async function register({ username, email, password }) {
 
 }
 
-export default register
+export default registerService

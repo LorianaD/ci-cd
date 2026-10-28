@@ -38,7 +38,7 @@ async function deleteTaskModel(id, userId) {
     );
 };
 
-export default {
+export {
     createTaskModel,
     getAllTaskModel,
     getByIdModel,

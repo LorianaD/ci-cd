@@ -1,7 +1,7 @@
-import taskModel from "../../models/tasks.model.js";
+import { getAllTaskModel } from "../../models/index.js";
 
 async function getAllTasksService(userId) {
-    const tasks = await taskModel.getAllTaskModel(userId);
+    const tasks = await getAllTaskModel(userId);
     return tasks;
 }
 

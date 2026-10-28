@@ -1,14 +1,14 @@
-import createTaskService from "../../services/tasks/createTask.service.js";
+import { createTaskService } from "../../services/index.js";
 
 async function createTask(req, res) {
     console.log("createTask controller OK");
     try {
-        console.log("try in create controller OK");
-        console.log("req.user :", req.user);
+        // console.log("try in create controller OK");
+        // console.log("req.user :", req.user);
         const { title, description, status } = req.body;
         const userId = req.user.sub;
-        console.log("req.user :", req.user);
-        console.log("userId :", userId);
+        // console.log("req.user :", req.user);
+        // console.log("userId :", userId);
         const task = await createTaskService({
             title,
             description,

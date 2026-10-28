@@ -4,7 +4,7 @@ function authMiddleware(req, res, next) {
     const header = req.headers.authorization;
     if (!header) {
         return res.status(401).json({
-            succes: false,
+            success: false,
             error: "Token maquant"
         });
     }
@@ -15,8 +15,8 @@ function authMiddleware(req, res, next) {
         next();
     } catch (error) {
         return res.status(401).json({
-            succes: false,
-            error: "Token invalise"
+            success: false,
+            error: "Token invalid"
         })
     }
 }

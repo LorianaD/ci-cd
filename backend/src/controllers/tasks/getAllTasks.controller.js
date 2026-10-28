@@ -1,4 +1,4 @@
-import getAllTasksService from "../../services/tasks/getAllTasks.service.js";
+import { getAllTasksService } from "../../services/index.js";
 
 async function getAllTasks(req, res) {
     console.log("getAllTasks controller OK");

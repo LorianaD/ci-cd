@@ -2,7 +2,7 @@ import pool from "../../db/db.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
-async function login(email, password) {
+async function loginService(email, password) {
 
     if ( !email || !password ) {
         const error = new Error("Email et mot de passe requis");
@@ -52,4 +52,4 @@ async function login(email, password) {
     };
 }
 
-export default login;
+export default loginService;
