@@ -17,11 +17,12 @@ async function getAllTaskModel(userId) {
 }
 
 async function getByIdModel(id, userId) {
-    const tasks = await db.query(
+    const [rows] = await db.query(
         "SELECT * FROM tasks WHERE id = ? AND user_id = ?",
         [id, userId]
-    )
-    return tasks[0] ?? null;
+    );
+
+    return rows[0] ?? null;
 }
 
 async function updateTaskModel(id, userId, data ){
@@ -32,11 +33,13 @@ async function updateTaskModel(id, userId, data ){
 };
 
 async function deleteTaskModel(id, userId) {
-    await db.query(
-        "DELETE FROM tasks WHERE id = ? AND user_id = ?"
+    const [result] = await db.query(
+        "DELETE FROM tasks WHERE id = ? AND user_id = ?",
         [id, userId]
     );
-};
+
+    return result.affectedRows;
+}
 
 export {
     createTaskModel,

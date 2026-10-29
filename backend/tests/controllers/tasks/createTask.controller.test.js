@@ -20,7 +20,7 @@ test("POST /api/tasks without token returns 401", async () => {
     assert.equal(response.status, 401);
     assert.deepEqual(response.body, {
         success: false,
-        error: "Token maquant"
+        error: "Token missing"
     });
 });
 

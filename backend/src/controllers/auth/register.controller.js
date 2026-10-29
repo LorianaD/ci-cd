@@ -2,7 +2,7 @@ import register from "../../services/auth/register.service.js";
 
 
 async function registerController(req, res, next) {
-    console.log("registerController OK");
+    // console.log("registerController OK");
     try {
         const user = await register(req.body)
         res.status(201).json({

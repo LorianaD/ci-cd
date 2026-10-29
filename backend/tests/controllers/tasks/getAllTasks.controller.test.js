@@ -14,7 +14,7 @@ test("GET /api/tasks without token return 401", async () => {
 
     assert.equal(response.status, 401);
     assert.equal(response.body.success, false);
-    assert.equal(response.body.error, "Token maquant");
+    assert.equal(response.body.error, "Token missing");
 });
 
 test("GET /api/tasks without token invalid return 401", async () => {
@@ -26,4 +26,3 @@ test("GET /api/tasks without token invalid return 401", async () => {
     assert.equal(response.body.success, false);
     assert.equal(response.body.error, "Token invalid");
 });
-

@@ -1,24 +1,29 @@
 import { Router } from "express";
+
 import createTask from "../controllers/tasks/createTask.controller.js";
 import getAllTasks from "../controllers/tasks/getAllTasks.controller.js";
+import getOneTask from "../controllers/tasks/getOneTask.controller.js";
 import updateTask from "../controllers/tasks/updateTask.controller.js";
 import deleteTask from "../controllers/tasks/deleteTask.controller.js";
+
 import authMiddleware from "../middlewares/auth.middleware.js";
-import getOneTask from "../controllers/tasks/getOneTask.controller.js";
 
 const router = Router();
 
-// POST : CREATE
-router.post("/", authMiddleware, createTask);
+// All task routes require authentication
+router.use(authMiddleware);
 
-// GET : READ
-router.get("/", authMiddleware, getAllTasks);
-router.get("/{id}", authMiddleware, getOneTask);
+// CREATE
+router.post("/", createTask);
 
-// PUT : UPDATE
-router.put("/", authMiddleware, updateTask);
+// READ
+router.get("/", getAllTasks);
+router.get("/:id", getOneTask);
 
-// DELETE : DELETE
-router.delete("/", authMiddleware, deleteTask);
+// UPDATE
+router.put("/:id", updateTask);
+
+// DELETE
+router.delete("/:id", deleteTask);
 
 export default router;
