@@ -7,6 +7,9 @@ jobs:
   test:
     runs-on: ubuntu-24.04
 
+    env:
+      NODE_ENV: ${{ vars.NODE_ENV }}
+
     defaults:
       run:
         working-directory: backend
