@@ -1,0 +1,79 @@
+name: Google Chat notify
+
+on:
+  workflow_call:
+    inputs:
+      tests_result:
+        required: true
+        type: string
+      build_result:
+        required: true
+        type: string
+      publish_result:
+        required: true
+        type: string
+    secrets:
+      GOOGLE_CHAT_WEBHOOK_URL:
+        required: true
+
+jobs:
+  notify:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Send Google Chat notification
+        env:
+          WEBHOOK_URL: ${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}
+          TESTS_RESULT: ${{ inputs.tests_result }}
+          BUILD_RESULT: ${{ inputs.build_result }}
+          PUBLISH_RESULT: ${{ inputs.publish_result }}
+          REPOSITORY: ${{ github.repository }}
+          COMMIT: ${{ github.sha }}
+          REF_NAME: ${{ github.ref_name }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          python3 - <<'PY'
+          import json
+          import os
+          import urllib.request
+
+          results = {
+              "Tests": os.environ["TESTS_RESULT"],
+              "Docker build": os.environ["BUILD_RESULT"],
+              "Docker publish": os.environ["PUBLISH_RESULT"],
+          }
+
+          failed = any(
+              result != "success"
+              for name, result in results.items()
+              if name != "Docker publish"
+          ) or results["Docker publish"] == "failure"
+
+          status = "FAILED" if failed else "SUCCESS"
+
+          details = "\n".join(
+              f"- {name}: {result}"
+              for name, result in results.items()
+          )
+
+          message = (
+              f"TaskFlow CI/CD - {status}\n"
+              f"Repository: {os.environ['REPOSITORY']}\n"
+              f"Version/branch: {os.environ['REF_NAME']}\n"
+              f"Commit: {os.environ['COMMIT'][:7]}\n"
+              f"{details}\n"
+              f"Logs: {os.environ['RUN_URL']}"
+          )
+
+          data = json.dumps({"text": message}).encode("utf-8")
+
+          request = urllib.request.Request(
+              os.environ["WEBHOOK_URL"],
+              data=data,
+              headers={"Content-Type": "application/json"},
+              method="POST",
+          )
+
+          with urllib.request.urlopen(request, timeout=15) as response:
+              print(f"Google Chat notification: HTTP {response.status}")
+          PY

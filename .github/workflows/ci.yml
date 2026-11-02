@@ -30,3 +30,18 @@ jobs:
     permissions:
       contents: read
       packages: write
+  google-chat-notify:
+    needs:
+      - backend-tests
+      - docker-build
+      - docker-publish
+    if: always()
+
+    uses: ./.github/workflows/google-chat-notify.yml
+
+    with:
+      tests_result: ${{ needs.backend-tests.result }}
+      build_result: ${{ needs.docker-build.result }}
+      publish_result: ${{ needs.docker-publish.result }}
+    secrets:
+      GOOGLE_CHAT_WEBHOOK_URL: ${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}
