@@ -1,7 +1,11 @@
+# Reusable workflow: sends a summary of the pipeline results to a Google Chat
+# space through an incoming webhook.
+
 name: Google Chat notify
 
 on:
   workflow_call:
+    # Results of the previous jobs, as provided by needs.<job>.result in ci.yml.
     inputs:
       tests_result:
         required: true
@@ -12,6 +16,7 @@ on:
       publish_result:
         required: true
         type: string
+    # The webhook URL grants posting rights to the Chat space: it is a secret.
     secrets:
       GOOGLE_CHAT_WEBHOOK_URL:
         required: true
@@ -21,6 +26,9 @@ jobs:
     runs-on: ubuntu-24.04
 
     steps:
+      # Values are passed through environment variables instead of being
+      # interpolated into the script: this prevents script injection and keeps
+      # the webhook URL out of the generated script (GitHub masks it in logs).
       - name: Send Google Chat notification
         env:
           WEBHOOK_URL: ${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}
@@ -31,6 +39,10 @@ jobs:
           COMMIT: ${{ github.sha }}
           REF_NAME: ${{ github.ref_name }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        # Inline Python using only the standard library (no extra dependency).
+        # Status rule: tests and build must be "success"; publish only counts
+        # as failed on "failure", because "skipped" is expected on pull requests.
+        # urlopen raises on HTTP errors, so a failed delivery fails the job.
         run: |
           python3 - <<'PY'
           import json

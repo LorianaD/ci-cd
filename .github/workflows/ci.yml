@@ -1,12 +1,19 @@
+# Main CI/CD orchestrator for TaskFlow.
+# Each stage lives in its own reusable workflow (workflow_call) and is chained
+# here: tests -> Docker build -> Docker publish, followed by a notification.
+
 name: TaskFlow CI
 
 on:
+  # Pushes to main publish the "dev" image; pushing a "v*" tag (e.g. v1.2.0)
+  # publishes a versioned release image.
   push:
     branches:
       - main
     tags:
       - 'v*'
 
+  # Pull requests only validate the code (tests + build); nothing is published.
   pull_request:
     branches:
       - main
@@ -15,10 +22,13 @@ jobs:
   backend-tests:
     uses: ./.github/workflows/backend-tests.yml
 
+  # Runs only if the tests succeed, so a broken image is never built.
   docker-build:
     needs: backend-tests
     uses: ./.github/workflows/docker-build.yml
 
+  # Publishing is restricted to pushes on main or on a "v*" tag.
+  # Pull requests are excluded so that unreviewed code never reaches the registry.
   docker-publish:
     needs: docker-build
     if: >-
@@ -27,9 +37,12 @@ jobs:
       startsWith(github.ref, 'refs/tags/v'))
 
     uses: ./.github/workflows/docker-publish.yml
+    # Least privilege: only this job gets write access to GitHub Packages (GHCR).
     permissions:
       contents: read
       packages: write
+  # always() makes the notification run even when a previous job failed,
+  # was skipped or was cancelled, so the team is informed in every case.
   google-chat-notify:
     needs:
       - backend-tests
@@ -39,9 +52,12 @@ jobs:
 
     uses: ./.github/workflows/google-chat-notify.yml
 
+    # Each job result (success, failure, skipped, cancelled) is forwarded
+    # so the notification can report the status of every stage.
     with:
       tests_result: ${{ needs.backend-tests.result }}
       build_result: ${{ needs.docker-build.result }}
       publish_result: ${{ needs.docker-publish.result }}
+    # Reusable workflows do not inherit secrets: the webhook must be passed explicitly.
     secrets:
       GOOGLE_CHAT_WEBHOOK_URL: ${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}

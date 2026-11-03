@@ -1,3 +1,7 @@
+# Reusable workflow: builds the backend image and publishes it to
+# GitHub Container Registry (GHCR). ci.yml calls it only on pushes to main
+# or on "v*" tags.
+
 name: Docker publish
 
 on:
@@ -6,9 +10,14 @@ on:
 jobs:
   build:
     runs-on: ubuntu-24.04
+    # Image versioning:
+    # - tag push (e.g. v1.2.0) -> image tagged with the version name
+    # - push to main            -> image tagged "dev" (overwritten on each push)
+    # The "cond && a || b" expression is the GitHub Actions ternary idiom.
     env:
       IMAGE_TAG: ${{ github.ref_type == 'tag' && github.ref_name || 'dev' }}
 
+    # packages: write is required to push to GHCR.
     permissions:
       contents: read
       packages: write
@@ -17,6 +26,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # GITHUB_TOKEN is generated automatically for each run and expires at the
+      # end of it: no personal access token needs to be stored.
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v3
         with:
@@ -24,6 +35,8 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      # The owner is written in lowercase because GHCR rejects image names
+      # that contain uppercase letters.
       - name: Build backend image
         run: docker build -t ghcr.io/lorianad/taskflow-backend:${{ env.IMAGE_TAG }} ./backend
       - name: Push backend image

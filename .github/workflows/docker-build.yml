@@ -1,3 +1,6 @@
+# Reusable workflow: checks that the backend Docker image builds successfully.
+# Runs on every push and pull request; the image is not pushed anywhere.
+
 name: Docker build
 
 on:
@@ -7,6 +10,7 @@ jobs:
   build:
     runs-on: ubuntu-24.04
 
+    # Read-only access: this job only needs to check out the code.
     permissions:
       contents: read
 
@@ -14,5 +18,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # Local "ci" tag only: the image is discarded when the runner shuts down.
       - name: Build backend image
         run: docker build -t taskflow-backend:ci ./backend
