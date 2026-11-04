@@ -41,3 +41,7 @@ jobs:
         run: docker build -t ghcr.io/lorianad/taskflow-backend:${{ env.IMAGE_TAG }} ./backend
       - name: Push backend image
         run: docker push ghcr.io/lorianad/taskflow-backend:${{ env.IMAGE_TAG }}
+      - name: Build frontend image
+        run: docker build -t ghcr.io/lorianad/taskflow-frontend:${{ env.IMAGE_TAG }} ./frontend
+      - name: Push frontend image
+        run: docker push ghcr.io/lorianad/taskflow-frontend:${{ env.IMAGE_TAG }}
