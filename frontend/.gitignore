@@ -23,3 +23,13 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Generated project architecture
+frontend/architecture.txt
+
+# Generated architecture
+frontend/architecture.txt
+
+# Unused static fonts
+frontend/src/assets/font/Inter/static/
+frontend/src/assets/font/Space_Grotesk/static/

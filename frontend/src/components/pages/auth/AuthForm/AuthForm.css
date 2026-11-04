@@ -1,0 +1,70 @@
+.auth-form {
+    display: flex;
+    width: 50%;
+    padding: 40px 24px;
+    justify-content: center;
+    align-items: center;
+    align-self: stretch;
+}
+
+.form-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 420px;
+    gap: 20px;
+}
+
+.form-card form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 20px;
+}
+
+.form-card__header {
+    display: flex;
+    padding-top: 6px;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: stretch;
+}
+
+.form-fields {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 20px;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    align-self: stretch;
+}
+
+.form-card__checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+}
+
+.form-card__checkbox input[type="checkbox"] {
+    flex-shrink: 0;
+    accent-color: var(--accent);
+}
+
+.form-card__forgot {
+    align-self: flex-end;
+    font-size: 13px;
+}
+
+.form-card__redirection {
+    width: 100%;
+    font-size: 14px;
+    text-align: center;
+}

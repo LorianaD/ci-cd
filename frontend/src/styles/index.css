@@ -1,1 +1,4 @@
-@import "./global.css"
+@import "./variable.css";
+
+@import "./global.css";
+@import "./fonts.css";

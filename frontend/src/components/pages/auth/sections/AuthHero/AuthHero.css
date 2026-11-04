@@ -1,0 +1,96 @@
+.auth-hero {
+    display: flex;
+    flex: 1;
+    min-width: 0;
+    padding: 40px 64px;
+    box-sizing: border-box;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 40px;
+    background: #003366;
+}
+
+.auth-hero__logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100px;
+}
+
+.auth-hero__header {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    flex: 1;
+}
+
+.auth-hero__header-title {
+    color: #FFF;
+    font-size: 44px;
+    font-weight: 600;
+    line-height: 1.05;
+}
+
+.auth-hero__header-description {
+    color: #C9C9C2;
+    line-height: 1.55;
+}
+
+.auth-hero__exemple {
+    display: flex;
+    width: 100%;
+    max-width: 420px;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1;
+}
+
+.auth-hero__tasks,
+.auth-hero__benefits {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 12px;
+}
+
+.auth-hero__task {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #454545;
+    border-radius: 10px;
+    color: var(--white);
+    font-size: 13px;
+}
+
+.auth-hero__benefits {
+    padding: 0;
+    list-style: none;
+}
+
+.auth-hero__benefits li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    color: var(--white);
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.auth-hero__check {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: var(--ink);
+    font-weight: 700;
+}

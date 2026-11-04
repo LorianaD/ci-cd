@@ -1,0 +1,13 @@
+.task-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background: var(--white);
+    border: 1px solid #E2E2DA;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.task-list .task-row:last-child {
+    border-bottom: none;
+}

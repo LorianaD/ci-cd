@@ -1,0 +1,25 @@
+.main-content {
+    display: flex;
+    width: 100%;
+    padding: 40px 24px;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.login-page,
+.register-page {
+    min-height: 100vh;
+    padding: 0;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1250px) {
+    .login-page,
+    .register-page {
+        flex-direction: column;
+    }
+}

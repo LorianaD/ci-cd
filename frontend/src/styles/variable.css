@@ -1,0 +1,33 @@
+:root {
+
+    /* COLORS */
+
+    --red : #B42318;
+    --pale-red : #FFE9DD;
+
+    --dark-blue : #003366;
+    --blue : #1D4ED8;
+    --pale-blue : #E4ECFF;
+
+    --green : #166534;
+    --pale-green : #E2F4E7;
+
+    --orange : #8A5A00;
+    --pale-orange : #FFF4D6;
+
+    --grey : #4B5563;
+    --pale-grey : #EEF0F2;
+
+    --white : #FFFFFF;
+
+    --ink : var(--dark-blue);
+    --accent : #C6F24E;
+    --background : #F3F3EE;
+    --text : #5E5E58;
+    --in-progress : #2563EB;
+    --error : #B42318;
+
+    --primary : var(--dark-blue);
+
+    --font-primary : "Space Grotesk";
+}

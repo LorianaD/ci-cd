@@ -1,0 +1,52 @@
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    width: fit-content;
+    padding: 5px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.badge__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+}
+
+/* STATUS */
+
+.badge--status-todo {
+    background: #EFEFEA;
+    color: #45453F;
+}
+
+.badge--status-in_progress {
+    background: #E4ECFF;
+    color: #1D4ED8;
+}
+
+.badge--status-done {
+    background: #E2F4E7;
+    color: #166534;
+}
+
+/* PRIORITY */
+
+.badge--priority-high {
+    background: #FFE9DD;
+    color: #B93815;
+}
+
+.badge--priority-medium {
+    background: #FFF4D6;
+    color: #8A5A00;
+}
+
+.badge--priority-low {
+    background: #EEF0F2;
+    color: #4B5563;
+}

@@ -1,0 +1,38 @@
+/* ==========================================================================
+   1. IMPORTATION DE INTER (Version Variable)
+   ========================================================================== */
+@font-face {
+  font-family: 'Inter';
+  src: url('../assets/font/Inter/Inter-VariableFont_opsz,wght.ttf') format('truetype');
+  font-weight: 100 900; /* Gère toutes les épaisseurs dynamiquement */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('../assets/font/Inter/Inter-Italic-VariableFont_opsz,wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: italic;
+}
+
+/* ==========================================================================
+   2. IMPORTATION DE SPACE GROTESK (Version Variable)
+   ========================================================================== */
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('../assets/font/Space_Grotesk/SpaceGrotesk-VariableFont_wght.ttf') format('truetype');
+  font-weight: 300 700; /* Épaisseurs disponibles pour cette police */
+  font-style: normal;
+}
+
+/* Appliquer Inter par défaut sur tout le site */
+body {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400; /* Regular */
+}
+
+/* Appliquer Space Grotesk sur les titres */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700; /* Gras */
+}

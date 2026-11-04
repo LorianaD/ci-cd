@@ -1,0 +1,83 @@
+.task-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    min-height: 76px;
+    padding: 14px 20px;
+    border-bottom: 1px solid #E2E2DA;
+    background: var(--white);
+    box-sizing: border-box;
+}
+
+.task-row__checkbox {
+    flex-shrink: 0;
+}
+
+.task-row__checkbox input {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: var(--accent);
+}
+
+.task-row__content {
+    display: flex;
+    flex: 1;
+    min-width: 0;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.task-row__title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+}
+
+.task-row__description {
+    font-size: 13px;
+    color: var(--text);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.task-row__date {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text);
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+.task-row__actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.task-row__actions button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--text);
+    cursor: pointer;
+}
+
+.task-row__actions button:hover {
+    background: var(--background);
+    color: var(--ink);
+}
+
+.task-row__actions button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
